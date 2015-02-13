@@ -11,6 +11,7 @@ import (
 
 func log(lg *logger.Logger, i int) {
 	lg.Debug("Debug>>>>>>>>>>>>>>>>>>>>>>" + strconv.Itoa(i))
+	lg.Debugf("Debug>>>>>>>>>>>>>>>>>>>>>>%s"+strconv.Itoa(i), "format test")
 	lg.Info("Info>>>>>>>>>>>>>>>>>>>>>>>>>" + strconv.Itoa(i))
 	lg.Warn("Warn>>>>>>>>>>>>>>>>>>>>>>>>>" + strconv.Itoa(i))
 	lg.Error("Error>>>>>>>>>>>>>>>>>>>>>>>>>" + strconv.Itoa(i))
@@ -25,7 +26,6 @@ func consoleLog() {
 		go log(lg, i)
 		time.Sleep(1000 * time.Millisecond)
 	}
-
 }
 
 func rollingFileLog() {

@@ -189,20 +189,62 @@ func (lg *Logger) log(level LEVEL, v ...interface{}) {
 	}
 }
 
+func (lg *Logger) logf(level LEVEL, format string, v ...interface{}) {
+	if lg.LogLevel <= level {
+		str := fmt.Sprintf(format, v...)
+		if lg.logObj != nil {
+			if lg.logObj.dailyRolling {
+				lg.logObj.fileCheck()
+			}
+			defer catchError()
+			lg.logObj.mu.RLock()
+			defer lg.logObj.mu.RUnlock()
+
+			lg.logObj.lg.Output(2, fmt.Sprintln(_Prefix[level], str))
+		}
+
+		lg.console(_Prefix[level], str)
+	}
+}
+
 func (lg *Logger) Debug(v ...interface{}) {
 	lg.log(DEBUG, v...)
 }
+
+func (lg *Logger) Debugf(format string, v ...interface{}) {
+	lg.logf(DEBUG, format, v...)
+}
+
 func (lg *Logger) Info(v ...interface{}) {
 	lg.log(INFO, v...)
 }
+
+func (lg *Logger) Infof(format string, v ...interface{}) {
+	lg.logf(INFO, format, v...)
+}
+
 func (lg *Logger) Warn(v ...interface{}) {
 	lg.log(WARN, v...)
 }
+
+func (lg *Logger) Warnf(format string, v ...interface{}) {
+	lg.logf(WARN, format, v...)
+}
+
 func (lg *Logger) Error(v ...interface{}) {
 	lg.log(ERROR, v...)
 }
+
+func (lg *Logger) Errorf(format string, v ...interface{}) {
+	lg.logf(ERROR, format, v...)
+}
+
 func (lg *Logger) Fatal(v ...interface{}) {
 	lg.log(FATAL, v...)
+}
+
+func (lg *Logger) Fatalf(format string, v ...interface{}) {
+	lg.logf(FATAL, format, v...)
 }
 
 func (f *_FILE) isMustRename() bool {

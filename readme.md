@@ -1,4 +1,4 @@
-binding [![Build Status](https://drone.io/github.com/fym201/loggo/status.png)](https://drone.io/github.com/fym201/loggo/latest) 
+boggo [![Build Status](https://drone.io/github.com/fym201/loggo/status.png)](https://drone.io/github.com/fym201/loggo/latest) 
 =======
 loggo 是golang 的日志库 ，是从go-logger上修改而来。 
 用法类似java日志工具包log4j 

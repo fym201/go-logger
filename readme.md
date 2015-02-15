@@ -1,50 +1,88 @@
-go-logger ÊÇgolang µÄÈÕÖ¾¿â £¬»ùÓÚ¶ÔgolangÄÚÖÃlogµÄ·â×°¡£
-ÓÃ·¨ÀàËÆjavaÈÕÖ¾¹¤¾ß°ülog4j
+binding [![Build Status](https://drone.io/github.com/fym201/loggo/status.png)](https://drone.io/github.com/fym201/loggo/latest) 
+=======
+loggo æ˜¯golang çš„æ—¥å¿—åº“ ï¼Œæ˜¯ä»Žgo-loggerä¸Šä¿®æ”¹è€Œæ¥ã€‚ 
+ç”¨æ³•ç±»ä¼¼javaæ—¥å¿—å·¥å…·åŒ…log4j 
 
-´òÓ¡ÈÕÖ¾ÓÐ5¸ö·½·¨ Debug£¬Info£¬Warn, Error ,Fatal  ÈÕÖ¾¼¶±ðÓÉµÍµ½¸ß
+æ‰“å°æ—¥å¿—æœ‰5ä¸ªæ–¹æ³• Debug(Debugf)ï¼ŒInfo(Infof)ï¼ŒWarn(Warnf), Error(Errorf),Fatal(Fatalf)  æ—¥å¿—çº§åˆ«ç”±ä½Žåˆ°é«˜ 
 
-ÉèÖÃÈÕÖ¾¼¶±ðµÄ·½·¨Îª£ºlogger.SetLevel() Èç£ºlogger.SetLevel(logger.WARN)
-Ôò£ºlogger.Debug(....),logger.Info(...) ÈÕÖ¾²»»á´ò³ö£¬¶ø 
- logger.Warn(...),logger.Error(...),logger.Fatal(...)ÈÕÖ¾»á´ò³ö¡£
-ÉèÖÃÈÕÖ¾¼¶±ðµÄ²ÎÊýÓÐ7¸ö£¬·Ö±ðÎª£ºALL£¬DEBUG£¬INFO£¬WARN£¬ERROR£¬FATAL£¬OFF
-ÆäÖÐ ALL±íÊ¾ËùÓÐµ÷ÓÃ´òÓ¡ÈÕÖ¾µÄ·½·¨¶¼»á´ò³ö£¬¶øOFFÔò±íÊ¾¶¼²»»á´ò³ö¡£
-
-
-ÈÕÖ¾ÎÄ¼þÇÐ¸îÓÐÁ½ÖÖÀàÐÍ£º1Îª°´ÈÕÆÚÇÐ·Ö¡£2Îª°´ÈÕÖ¾´óÐ¡ÇÐ·Ö¡£
-°´ÈÕÆÚÇÐ·ÖÊ±£ºÃ¿ÌìÒ»¸ö±¸·ÝÈÕÖ¾ÎÄ¼þ£¬ºó×ºÎª .yyyy-MM-dd 
-¹ý0µãÊÇÉú³ÉÇ°Ò»Ìì±¸·ÝÎÄ¼þ
-
-°´´óÐ¡ÇÐ·ÖÊÇÐèÒª3¸ö²ÎÊý£¬1ÎªÎÄ¼þ´óÐ¡£¬2Îªµ¥Î»£¬3ÎªÎÄ¼þÊýÁ¿
-ÎÄ¼þÔö³¤µ½Ö¸¶¨ÏÞÖµÊ±£¬Éú³É±¸·ÝÎÄ¼þ£¬½áÎ²ÎªÒÀ´ÎµÝÔöµÄ×ÔÈ»Êý¡£
-ÎÄ¼þÊýÁ¿Ôö³¤µ½Ö¸¶¨ÏÞÖÆÊ±£¬ÐÂÉú³ÉµÄÈÕÖ¾ÎÄ¼þ½«¸²¸ÇÇ°ÃæÉú³ÉµÄÍ¬ÃûµÄ±¸·ÝÈÕÖ¾ÎÄ¼þ¡£
-
-Ê¾Àý£º
-
-	//Ö¸¶¨ÊÇ·ñ¿ØÖÆÌ¨´òÓ¡£¬Ä¬ÈÏÎªtrue
-	logger.SetConsole(true)
-	//Ö¸¶¨ÈÕÖ¾ÎÄ¼þ±¸·Ý·½Ê½ÎªÎÄ¼þ´óÐ¡µÄ·½Ê½
-	//µÚÒ»¸ö²ÎÊýÎªÈÕÖ¾ÎÄ¼þ´æ·ÅÄ¿Â¼
-	//µÚ¶þ¸ö²ÎÊýÎªÈÕÖ¾ÎÄ¼þÃüÃû
-	//µÚÈý¸ö²ÎÊýÎª±¸·ÝÎÄ¼þ×î´óÊýÁ¿
-	//µÚËÄ¸ö²ÎÊýÎª±¸·ÝÎÄ¼þ´óÐ¡
-	//µÚÎå¸ö²ÎÊýÎªÎÄ¼þ´óÐ¡µÄµ¥Î» KB£¬MB£¬GB TB
-	//logger.SetRollingFile("d:/logtest", "test.log", 10, 5, logger.KB)
-
-	//Ö¸¶¨ÈÕÖ¾ÎÄ¼þ±¸·Ý·½Ê½ÎªÈÕÆÚµÄ·½Ê½
-	//µÚÒ»¸ö²ÎÊýÎªÈÕÖ¾ÎÄ¼þ´æ·ÅÄ¿Â¼
-	//µÚ¶þ¸ö²ÎÊýÎªÈÕÖ¾ÎÄ¼þÃüÃû
-	logger.SetRollingDaily("d:/logtest", "test.log")
-
-	//Ö¸¶¨ÈÕÖ¾¼¶±ð  ALL£¬DEBUG£¬INFO£¬WARN£¬ERROR£¬FATAL£¬OFF ¼¶±ðÓÉµÍµ½¸ß
-	//Ò»°ãÏ°¹ßÊÇ²âÊÔ½×¶ÎÎªdebug£¬Éú³É»·¾³ÎªinfoÒÔÉÏ
-	logger.SetLevel(logger.DEBUG)
+è®¾ç½®æ—¥å¿—çº§åˆ«çš„æ–¹æ³•ä¸ºï¼š`logger.LogLevel = loggo.WARN` 
+åˆ™ï¼šlogger.Debug(....),logger.Info(...) æ—¥å¿—ä¸ä¼šæ‰“å‡º
+è€Œ`logger.Warn(...)`,`logger.Error(...)`,`logger.Fatal(...)`æ—¥å¿—ä¼šæ‰“å‡ºã€‚ 
 
 
-´òÓ¡ÈÕÖ¾£º
-func log(i int) {
-	logger.Debug("Debug>>>>>>>>>>>>>>>>>>>>>>" + strconv.Itoa(i))
-	logger.Info("Info>>>>>>>>>>>>>>>>>>>>>>>>>" + strconv.Itoa(i))
-	logger.Warn("Warn>>>>>>>>>>>>>>>>>>>>>>>>>" + strconv.Itoa(i))
-	logger.Error("Error>>>>>>>>>>>>>>>>>>>>>>>>>" + strconv.Itoa(i))
-	logger.Fatal("Fatal>>>>>>>>>>>>>>>>>>>>>>>>>" + strconv.Itoa(i))
+è®¾ç½®æ—¥å¿—çº§åˆ«çš„å‚æ•°æœ‰7ä¸ªï¼Œåˆ†åˆ«ä¸ºï¼š`ALL,DEBUG,INFO, WARN,ERROR,FATAL,OFF` 
+å…¶ä¸­`ALL`è¡¨ç¤ºæ‰€æœ‰è°ƒç”¨æ‰“å°æ—¥å¿—çš„æ–¹æ³•éƒ½ä¼šæ‰“å‡ºï¼Œè€Œ`OFF`åˆ™è¡¨ç¤ºéƒ½ä¸ä¼šæ‰“å‡ºã€‚
+
+
+æ—¥å¿—æ–‡ä»¶åˆ‡å‰²æœ‰ä¸¤ç§ç±»åž‹ï¼š1ä¸ºæŒ‰æ—¥æœŸåˆ‡åˆ†ã€‚2ä¸ºæŒ‰æ—¥å¿—å¤§å°åˆ‡åˆ†ã€‚
+æŒ‰æ—¥æœŸåˆ‡åˆ†æ—¶ï¼šæ¯å¤©ä¸€ä¸ªå¤‡ä»½æ—¥å¿—æ–‡ä»¶ï¼ŒåŽç¼€ä¸º `.yyyy-MM-dd`
+è¿‡0ç‚¹æ˜¯ç”Ÿæˆå‰ä¸€å¤©å¤‡ä»½æ–‡ä»¶
+	logger, err := loggo.NewRollingDailyLogger("d:/log_test/rolling_daily", "test.log")
+
+
+æŒ‰å¤§å°åˆ‡åˆ†æ˜¯éœ€è¦3ä¸ªå‚æ•°ï¼Œ1ä¸ºæ–‡ä»¶å¤§å°ï¼Œ2ä¸ºå•ä½ï¼Œ3ä¸ºæ–‡ä»¶æ•°é‡
+æ–‡ä»¶å¢žé•¿åˆ°æŒ‡å®šé™å€¼æ—¶ï¼Œç”Ÿæˆå¤‡ä»½æ–‡ä»¶ï¼Œç»“å°¾ä¸ºä¾æ¬¡é€’å¢žçš„è‡ªç„¶æ•°ã€‚
+æ–‡ä»¶æ•°é‡å¢žé•¿åˆ°æŒ‡å®šé™åˆ¶æ—¶ï¼Œæ–°ç”Ÿæˆçš„æ—¥å¿—æ–‡ä»¶å°†è¦†ç›–å‰é¢ç”Ÿæˆçš„åŒåçš„å¤‡ä»½æ—¥å¿—æ–‡ä»¶ã€‚
+	logger, err := loggo.NewRollingFileLogger("d:/log_test/rolling_file", "test.log", 10, 5*loggo.KB)
+
+###ç¤ºä¾‹ï¼š
+
+//æ‰“å°æ—¥å¿— 
+```
+func log(lg *loggo.Logger, i int) {
+	lg.Debug("Debug>>>>>>>>>>>>>>>>>>>>>>" + strconv.Itoa(i))
+	lg.Debugf("Debug>>>>>>>>>>>>>>>>>>>>>>%s"+strconv.Itoa(i), "format test")
+	lg.Info("Info>>>>>>>>>>>>>>>>>>>>>>>>>" + strconv.Itoa(i))
+	lg.Warn("Warn>>>>>>>>>>>>>>>>>>>>>>>>>" + strconv.Itoa(i))
+	lg.Error("Error>>>>>>>>>>>>>>>>>>>>>>>>>" + strconv.Itoa(i))
+	lg.Fatal("Fatal>>>>>>>>>>>>>>>>>>>>>>>>>" + strconv.Itoa(i))
 }
+```
+
+//å•çº¯çš„æŽ§åˆ¶å°logï¼Œä¸å†™æ–‡ä»¶
+```
+func consoleLog() {
+	lg := loggo.NewConsoleLogger()
+
+	for i := 10000; i > 0; i-- {
+		go log(lg, i)
+		time.Sleep(1000 * time.Millisecond)
+	}
+}
+```
+
+//æŒ‡å®šæ—¥å¿—æ–‡ä»¶å¤‡ä»½æ–¹å¼ä¸ºæ–‡ä»¶å¤§å°çš„æ–¹å¼ 
+```
+func rollingFileLog() {
+	//ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºæ—¥å¿—æ–‡ä»¶å­˜æ”¾ç›®å½•
+	//ç¬¬äºŒä¸ªå‚æ•°ä¸ºæ—¥å¿—æ–‡ä»¶å‘½å
+	//ç¬¬ä¸‰ä¸ªå‚æ•°ä¸ºå¤‡ä»½æ–‡ä»¶æœ€å¤§æ•°é‡
+	//ç¬¬å››ä¸ªå‚æ•°ä¸ºå¤‡ä»½æ–‡ä»¶å¤§å°,å•ä½ä¸ºbyte
+	lg, err := loggo.NewRollingFileLogger("d:/log_test/rolling_file", "test.log", 10, 5*loggo.KB)
+	if err != nil {
+		panic(err)
+	}
+	lg.LogLevel = loggo.DEBUG //æ—¥å¿—çº§åˆ«ï¼Œé»˜è®¤ä¸ºlogger.DEBUG
+	for i := 10000; i > 0; i-- {
+		go log(lg, i)
+		time.Sleep(1000 * time.Millisecond)
+	}
+}
+```
+
+
+//æŒ‡å®šæ—¥å¿—æ–‡ä»¶å¤‡ä»½æ–¹å¼ä¸ºæ—¥æœŸçš„æ–¹å¼ 
+```
+func rollingDailyLog() {
+	//ç¬¬ä¸€ä¸ªå‚æ•°ä¸ºæ—¥å¿—æ–‡ä»¶å­˜æ”¾ç›®å½•
+	//ç¬¬äºŒä¸ªå‚æ•°ä¸ºæ—¥å¿—æ–‡ä»¶å‘½å
+	lg, err := loggo.NewRollingDailyLogger("d:/log_test/rolling_daily", "test.log")
+	if err != nil {
+		panic(err)
+	}
+	for i := 10000; i > 0; i-- {
+		go log(lg, i)
+		time.Sleep(100 * time.Millisecond)
+	}
+}
+```

@@ -152,7 +152,7 @@ func NewRollingDailyLogger(fileDir, fileName string) (lg *Logger, err error) {
 
 func (lg *Logger) console(s ...interface{}) {
 	if lg.ConsoleAppender {
-		_, file, line, _ := runtime.Caller(2)
+		_, file, line, _ := runtime.Caller(3)
 		short := file
 		for i := len(file) - 1; i > 0; i-- {
 			if file[i] == '/' {
@@ -182,7 +182,7 @@ func (lg *Logger) log(level LEVEL, v ...interface{}) {
 			lg.logObj.mu.RLock()
 			defer lg.logObj.mu.RUnlock()
 
-			lg.logObj.lg.Output(2, fmt.Sprintln(_Prefix[level], v))
+			lg.logObj.lg.Output(3, fmt.Sprintln(_Prefix[level], v))
 		}
 
 		lg.console(_Prefix[level], v)
@@ -200,7 +200,7 @@ func (lg *Logger) logf(level LEVEL, format string, v ...interface{}) {
 			lg.logObj.mu.RLock()
 			defer lg.logObj.mu.RUnlock()
 
-			lg.logObj.lg.Output(2, fmt.Sprintln(_Prefix[level], str))
+			lg.logObj.lg.Output(3, fmt.Sprintln(_Prefix[level], str))
 		}
 
 		lg.console(_Prefix[level], str)

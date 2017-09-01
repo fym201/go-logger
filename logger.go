@@ -30,8 +30,8 @@ const (
 
 const (
 	ALL LEVEL = iota
-	DEBUG
 	INFO
+	DEBUG
 	WARN
 	ERROR
 	FATAL
@@ -56,7 +56,7 @@ type _FILE struct {
 }
 
 type Logger struct {
-	LogLevel        LEVEL //default:DEBUG,日志等级 ALL，DEBUG，INFO，WARN，ERROR，FATAL，OFF 级别由低到高
+	LogLevel        LEVEL //default:DEBUG,日志等级 ALL，INFO，DEBUG，WARN，ERROR，FATAL，OFF 级别由低到高
 	ConsoleAppender bool  //default:true,是否要在控制台上输出
 	logObj          *_FILE
 }
@@ -147,6 +147,7 @@ func NewRollingDailyLogger(fileDir, fileName string) (lg *Logger, err error) {
 		ConsoleAppender: true,
 		logObj:          logObj}
 
+	go logObj.fileMonitor()
 	return
 }
 
@@ -175,9 +176,11 @@ func catchError() {
 func (lg *Logger) log(level LEVEL, v ...interface{}) {
 	if lg.LogLevel <= level {
 		if lg.logObj != nil {
-			if lg.logObj.dailyRolling {
-				lg.logObj.fileCheck()
-			}
+			/*
+				if lg.logObj.dailyRolling {
+					lg.logObj.fileCheck()
+				}
+			*/
 			defer catchError()
 			lg.logObj.mu.RLock()
 			defer lg.logObj.mu.RUnlock()
